@@ -1,0 +1,20 @@
+.cards-container{
+    width:90vw;
+    height:60vh;
+    border: 1px solid #000;
+    margin-top: 2rem;
+    overflow-y: scroll;
+
+    display: grid;
+    gap:20px;
+    grid-template-columns: repeat(3,minmax(20rem,1fr));
+    grid-template-rows:repeat(auto-fill,minmax(15rem,1fr));
+    justify-items: center;
+    align-items: center;
+}
+
+@media only screen and (max-width:800px){
+    .cards-container{
+        grid-template-columns: repeat(1,minmax(20rem,1fr));
+    }
+}
