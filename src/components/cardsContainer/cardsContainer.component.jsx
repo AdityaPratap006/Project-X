@@ -3,7 +3,7 @@ import './cardsContainer.styles.scss'
 
 import MutualFundCard from '../card/card.component'
 
-const CardsContainer = ({list,bringInForComparision,removeFromComparision}) => {
+const CardsContainer = ({list, selectedForComparision, bringInForComparision, removeFromComparision}) => {
     
     return (
         <div className='cards-container'>
@@ -12,6 +12,7 @@ const CardsContainer = ({list,bringInForComparision,removeFromComparision}) => {
                     <MutualFundCard 
                         key={mutualFund.id} 
                         {...mutualFund} 
+                        selectedForComparision={selectedForComparision}
                         bringInForComparision={bringInForComparision}
                         removeFromComparision={removeFromComparision}/>
                 ))

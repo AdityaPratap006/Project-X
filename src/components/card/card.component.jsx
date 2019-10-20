@@ -3,10 +3,23 @@ import './card.styles.scss'
 
 export class MutualFundCard extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             selected:false
+        }
+    }
+
+    componentDidMount(){
+        if(this.props.selectedForComparision.filter(fund => fund.id === this.props.id).length === 1){
+            this.setState({
+                selected:true
+            })
+        }
+        else{
+            this.setState({
+                selected:false
+            })
         }
     }
 
@@ -24,8 +37,10 @@ export class MutualFundCard extends Component {
 
     render() {
         
-        const {name, rating, category, return_1yr, return_3yr, return_5yr, minimum_investment, riskometer } = this.props;
+        const { name, rating, category, return_1yr, return_3yr, return_5yr, minimum_investment, riskometer} = this.props;
         
+        
+
         return (
             <div className='mutual-fund-card'>
                 <div className='header'>

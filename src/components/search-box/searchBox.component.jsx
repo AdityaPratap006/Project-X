@@ -3,10 +3,10 @@ import './searchBox.styles.scss'
 
 export class SearchBox extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
-            searchQuery:''
+            searchQuery: props.currentSearchInput
         }
     }
 
@@ -18,13 +18,13 @@ export class SearchBox extends Component {
 
     render() {
         const {onSubmitSearch} = this.props;
-        const {searchQuery} = this.state;
+        const { searchQuery } = this.state;
         return (
             <div className='search-box'>
                 <input
                     type='text'
                     name='search'
-                    
+                    value={ searchQuery }
                     placeholder='Search Mutual Funds...'
                     onChange={ event => this.setSearchQuery(event) }
                 />

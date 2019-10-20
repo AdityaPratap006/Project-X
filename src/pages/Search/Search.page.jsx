@@ -8,13 +8,16 @@ export class SearchPage extends Component {
 
  
     render() {
-        const { mutualFundsList, getSearchInput, bringInForComparision, removeFromComparision } = this.props;
+        const { mutualFundsList, currentSearchInput, getSearchInput, selectedForComparision, bringInForComparision, removeFromComparision } = this.props;
         
         return (
             <div className='search-page'>
-                <SearchBox onSubmitSearch={getSearchInput}/>
+                <SearchBox currentSearchInput={currentSearchInput} onSubmitSearch={getSearchInput}/>
+                <h3>Mutual Funds selected for comparision: {selectedForComparision.length}</h3>
+                <h4>{mutualFundsList.length?`Here are your mutual fund results`:`No Result Found`}</h4>
                 <CardsContainer 
-                    list = {mutualFundsList} 
+                    list = {mutualFundsList}
+                    selectedForComparision={selectedForComparision} 
                     bringInForComparision={bringInForComparision}
                     removeFromComparision={removeFromComparision}/>
             </div>

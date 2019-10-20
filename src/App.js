@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import Navbar from './components/navbar/navbar.component';
 import SearchPage from './pages/Search/Search.page';
+import ComparisonPage from './pages/Comparision/Comparision.page';
 
 class  App extends React.Component {
 
@@ -11,10 +12,17 @@ class  App extends React.Component {
     this.state={
       mutualFunds: [],
       currentRoute:'search',
-      selectedForComparision:[]
+      selectedForComparision:[],
+      currentSearchInput:''
     }
   }
 
+  changeRoute = (route) => {
+
+    this.setState({
+      currentRoute:route
+    })
+  }
 
   componentDidMount=()=>{
       fetch('https://api.piggy.co.in/v2/mf/search/',{
@@ -56,7 +64,7 @@ class  App extends React.Component {
 
         this.setState({
           mutualFunds:funds,
-          
+          currentSearchInput:text
         })
     })
     .catch(err => console.error('Something went wrong!'))
@@ -84,25 +92,27 @@ class  App extends React.Component {
   }
 
   render() {
-    const { mutualFunds, currentRoute } = this.state;
+    const { mutualFunds, currentRoute, selectedForComparision, currentSearchInput } = this.state;
     
     let currentPage = null;
     
     if(currentRoute === 'search'){
       currentPage = <SearchPage 
+                        currentSearchInput={currentSearchInput}
                         getSearchInput={this.getSearchInput} 
                         mutualFundsList = {mutualFunds}
+                        selectedForComparision={selectedForComparision}
                         bringInForComparision={this.bringInForComparision} 
                         removeFromComparision={this.removeFromComparision}    
                     />
     }
     else if(currentRoute === 'compare'){
-      currentPage = <div style={{paddingTop:'10rem'}}><h1>Compare</h1></div>
+      currentPage = <ComparisonPage fundsToBeCompared={this.state.selectedForComparision}/>
     }
 
     return (
       <div className="App">
-          <Navbar/>
+          <Navbar changeRoute={this.changeRoute}/>
           {
             
             currentPage
